@@ -87,13 +87,6 @@ const Searchbar = ({ statsColor }) => {
               );
             })}
           </div>
-
-          <button
-            className="btn bg-light text-dark my-1"
-            onClick={() => setShow(!show)}
-          >
-            Hide
-          </button>
         </div>
       )}
     </div>
