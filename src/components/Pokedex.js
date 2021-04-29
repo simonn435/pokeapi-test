@@ -10,6 +10,7 @@ const Pokedex = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
+  const [favorites, setFavorites] = useState([]);
 
   // GET POKEMONS DATA
   const fetchPokemonsData = async () => {
@@ -39,7 +40,6 @@ const Pokedex = () => {
   };
 
   const statsColor = (number) => {
-    console.log(number);
     if (number < 50) {
       return "danger";
     } else if (number >= 50 && number < 75) {
@@ -49,9 +49,25 @@ const Pokedex = () => {
     }
   };
 
+  const handleFavorites = (name) => {
+    if (!favorites.includes(name)) {
+      setFavorites([...favorites, name]);
+    } else {
+      const removeFavorite = favorites.filter((f) => f !== name);
+      setFavorites(removeFavorite);
+    }
+  };
+
   return (
     <section>
-      <Searchbar statsColor={statsColor} />
+      <Searchbar
+        statsColor={statsColor}
+        favorites={favorites}
+        handleFavorites={handleFavorites}
+      />
+      <div className="text-center">
+        <h4>Favorites Pokemons: {favorites.length}</h4>
+      </div>
       <Pagination
         page={page}
         total={total}
@@ -62,6 +78,8 @@ const Pokedex = () => {
         pokemonInfo={pokemonInfo}
         loading={loading}
         statsColor={statsColor}
+        favorites={favorites}
+        handleFavorites={handleFavorites}
       />
       <Pagination
         page={page}

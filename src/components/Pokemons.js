@@ -1,8 +1,15 @@
 import React from "react";
 import Loading from "./Loading";
 import { colors } from "../colors";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-const Pokemons = ({ pokemonInfo, loading, statsColor }) => {
+const Pokemons = ({
+  pokemonInfo,
+  loading,
+  statsColor,
+  favorites,
+  handleFavorites,
+}) => {
   return (
     <div className="d-flex flex-wrap justify-content-center align-items-center">
       {loading ? (
@@ -70,6 +77,26 @@ const Pokemons = ({ pokemonInfo, loading, statsColor }) => {
                     </span>
                   );
                 })}
+              </div>
+
+              <div className="py-2">
+                {favorites.includes(pokemon.name) ? (
+                  <button
+                    style={{ fontSize: "2rem", cursor: "pointer" }}
+                    className="bg-transparent border-0 text-light"
+                    onClick={() => handleFavorites(pokemon.name)}
+                  >
+                    <AiFillHeart />
+                  </button>
+                ) : (
+                  <button
+                    style={{ fontSize: "2rem", cursor: "pointer" }}
+                    className="bg-transparent border-0 text-light"
+                    onClick={() => handleFavorites(pokemon.name)}
+                  >
+                    <AiOutlineHeart />
+                  </button>
+                )}
               </div>
             </div>
           );
